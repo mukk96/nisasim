@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# encoding: utf-8
 """積み立てNISAの運用シミュレーションCLI。"""
 
 from __future__ import annotations
@@ -18,6 +19,7 @@ def simulate(monthly_contribution: float, annual_return_percent: float, years: i
 
     principal = monthly_contribution * months
     profit = balance - principal
+
     return principal, profit, balance
 
 
@@ -32,7 +34,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> None:
     args = build_parser().parse_args()
     principal, profit, result = simulate(args.monthly_contribution, args.annual_return, args.years)
-    print(f"{principal:,.0f} 円 {profit:,.0f} 円 {result:,.0f} 円")
+    print(f"{principal:.0f}\t{profit:.0f}\t{result:.0f}")
 
 
 if __name__ == "__main__":
