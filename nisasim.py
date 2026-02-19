@@ -6,8 +6,8 @@ from __future__ import annotations
 import argparse
 
 
-def simulate(monthly_contribution: float, annual_return_percent: float, years: int) -> float:
-    """毎月積み立て・複利運用した最終金額を返す。"""
+def simulate(monthly_contribution: float, annual_return_percent: float, years: int) -> tuple[float, float, float]:
+    """毎月積み立て・複利運用した元本・運用収益・最終金額を返す。"""
     months = years * 12
     monthly_rate = annual_return_percent / 100 / 12
     balance = 0.0
@@ -16,7 +16,9 @@ def simulate(monthly_contribution: float, annual_return_percent: float, years: i
         balance *= 1 + monthly_rate
         balance += monthly_contribution
 
-    return balance
+    principal = monthly_contribution * months
+    profit = balance - principal
+    return principal, profit, balance
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -29,8 +31,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main() -> None:
     args = build_parser().parse_args()
-    result = simulate(args.monthly_contribution, args.annual_return, args.years)
-    print(f"{result:,.0f} 円")
+    principal, profit, result = simulate(args.monthly_contribution, args.annual_return, args.years)
+    print(f"{principal:,.0f} 円 {profit:,.0f} 円 {result:,.0f} 円")
 
 
 if __name__ == "__main__":
