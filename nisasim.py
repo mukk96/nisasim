@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # encoding: utf-8
-"""積み立てNISAの運用シミュレーションCLI。"""
+"""つみたてNISAの運用シミュレーションCLI。"""
 
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ def simulate(monthly_contribution: float, annual_return_percent: float, years: i
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="積み立てNISAの運用シミュレーション")
+    parser = argparse.ArgumentParser(description="つみたてNISAの運用シミュレーション")
     parser.add_argument("monthly_contribution", type=float, help="毎月の積立金額（円）")
     parser.add_argument("annual_return", type=float, help="予定利回り（年率、%%）")
     parser.add_argument("years", type=int, help="運用年数")
